@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#20190d">
+<title>Calculadora de Oro</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:24px 16px;background:#17140f;color:#fff6df;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+main{max-width:440px;margin:20px auto;background:#252016;border:1px solid #8c6b25;border-radius:22px;padding:24px;box-shadow:0 12px 36px #0005}
+header{text-align:center;border-bottom:1px solid #655022;padding-bottom:20px}
+.symbol{font-size:42px;color:#e9bd51}
+h1{margin:8px 0;color:#f2ce70;font-size:27px}
+p{color:#c8bfa9;line-height:1.5;font-size:14px}
+label{display:block;margin:24px 0 9px;color:#f2ce70;font-weight:bold}
+input{width:100%;padding:15px;border-radius:11px;border:1px solid #947632;background:#17140f;color:white;font-size:22px}
+.result{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px;margin-top:11px;background:#30291b;border-radius:12px}
+.result span{color:#e5d8b8}
+.result strong{color:#f2ce70;font-size:18px;text-align:right}
+.total{margin-top:18px;padding:19px;background:#47371a;border:1px solid #bd9439;border-radius:14px}
+.total span{display:block;color:#f2dca5;font-size:13px}
+.total strong{display:block;margin-top:8px;font-size:30px;color:#ffda72}
+button{width:100%;padding:14px;margin-top:18px;border:1px solid #c8a34b;border-radius:11px;background:#d9b451;color:#21190b;font-size:16px;font-weight:bold}
+footer{font-size:12px;color:#b9ae97;line-height:1.6;margin-top:20px}
+</style>
+</head>
+<body>
+<main>
+<header><div class="symbol">◈</div><h1>Calculadora de Oro</h1><p>Calcula tu aleación con precisión</p></header>
+<label for="oro">Gramos de oro puro (24 quilates)</label>
+<input id="oro" type="number" min="0" step="any" value="100" inputmode="decimal">
+<div class="result"><span>Oro puro</span><strong id="o">100 g</strong></div>
+<div class="result"><span>Cobre · 17%</span><strong id="c">17 g</strong></div>
+<div class="result"><span>Plata · 21%</span><strong id="p">21 g</strong></div>
+<div class="total"><span>PESO TOTAL DE LA ALEACIÓN</span><strong id="t">138 g</strong></div>
+<button onclick="document.getElementById('oro').value=100;calcular()">Restablecer a 100 g</button>
+<footer>Fórmula: cobre = oro × 0,17 · plata = oro × 0,21. El resultado presupone metales puros y no contempla pérdidas de fundición.</footer>
+</main>
+<script>
+function calcular(){
+let n=Math.max(0,Number(document.getElementById('oro').value)||0);
+let f=x=>x.toLocaleString('es-CO',{maximumFractionDigits:4})+' g';
+document.getElementById('o').textContent=f(n);
+document.getElementById('c').textContent=f(n*.17);
+document.getElementById('p').textContent=f(n*.21);
+document.getElementById('t').textContent=f(n*1.38);
+}
+document.getElementById('oro').addEventListener('input',calcular);
+calcular();
+</script>
+</body>
+</html>
